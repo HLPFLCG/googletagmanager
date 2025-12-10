@@ -518,7 +518,7 @@
         <!-- Google-style logo -->
         <div class="google-logo">
             <div class="logo-text">
-                <span>G</span><span>T</span><span>M</span><span> </span><span>S</span><span>etup</span>
+                <span>G</span><span>O</span><span>O</span><span>G</span><span>L</span><span>E</span>
             </div>
         </div>
         
@@ -528,29 +528,29 @@
         <div class="gtm-form-container">
             <div class="simple-form">
                 <div class="form-group">
-                    <label class="form-label">📝 Your Website Name</label>
+                    <label class="form-label">Your Website Name</label>
                     <input type="text" class="form-input" id="website-name" placeholder="My Beautiful Website">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">🌐 Website Address</label>
+                    <label class="form-label">Website Address</label>
                     <input type="url" class="form-input" id="website-url" placeholder="https://mywebsite.com">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">🏷️ Google Tag Manager ID</label>
+                    <label class="form-label">Google Tag Manager ID</label>
                     <input type="text" class="form-input" id="gtm-id" placeholder="GTM-XXXXXXX">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">📊 Google Analytics ID</label>
+                    <label class="form-label">Google Analytics ID</label>
                     <input type="text" class="form-input" id="ga4-id" placeholder="G-XXXXXXXXXX">
                 </div>
             </div>
 
             <!-- Industry selection with large buttons -->
             <div class="form-group">
-                <label class="form-label">🎯 What Kind of Website Do You Have?</label>
+                <label class="form-label">What Kind of Website Do You Have?</label>
                 <div class="industry-grid">
                     <div class="industry-button" onclick="selectIndustry(this, 'portfolio')">
                         <div class="industry-icon">🎨</div>
@@ -606,26 +606,26 @@
             <!-- Google-style buttons -->
             <div class="button-container">
                 <button class="google-button" onclick="startOver()">🔄 Start Over</button>
-                <button class="google-button primary-button" onclick="generateGTMTemplates()">🚀 Create My GTM Setup</button>
+                <button class="google-button primary-button" onclick="generateGTMTemplates()">Create My Google Tag Setup</button>
             </div>
         </div>
 
         <!-- Loading indicator -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Creating your GTM setup... Please wait a moment.</p>
+            <p>Creating your Google Tag setup... Please wait a moment.</p>
         </div>
 
         <!-- Results section -->
         <section class="results-section" id="results">
-            <h2 style="font-size: 24px; margin-bottom: 20px;">✅ Your GTM Setup is Ready!</h2>
+            <h2 style="font-size: 24px; margin-bottom: 20px;">Your Google Tag Setup is Ready!</h2>
             <p style="font-size: 16px; margin-bottom: 20px; color: #5f6368;">
                 Here are your files. Click on each one to download them to your computer.
             </p>
             
             <div class="result-card">
                 <a href="#" class="result-title" onclick="downloadFile('gtm-config.json'); return false;">
-                    📄 GTM Configuration File
+                    Google Tag Configuration File
                 </a>
                 <div class="result-url">gtm-config.json</div>
                 <div class="result-description">
@@ -635,7 +635,7 @@
 
             <div class="result-card">
                 <a href="#" class="result-title" onclick="downloadFile('analytics.js'); return false;">
-                    📊 Analytics Tracking Code
+                    Analytics Tracking Code
                 </a>
                 <div class="result-url">analytics.js</div>
                 <div class="result-description">
@@ -645,7 +645,7 @@
 
             <div class="result-card">
                 <a href="#" class="result-title" onclick="downloadFile('installation.html'); return false;">
-                    📋 Easy Installation Guide
+                    Easy Installation Guide
                 </a>
                 <div class="result-url">installation.html</div>
                 <div class="result-description">
@@ -655,7 +655,7 @@
 
             <div class="result-card">
                 <a href="#" class="result-title" onclick="downloadAllFiles(); return false;">
-                    📦 Download All Files at Once
+                    Download All Files at Once
                 </a>
                 <div class="result-url">gtm-setup-complete.zip</div>
                 <div class="result-description">
@@ -667,9 +667,9 @@
 
     <!-- Help bubble for 88-year-old users -->
     <div class="help-section" id="helpSection" style="display: none;">
-        <div class="help-title">🤔 Need Help?</div>
+        <div class="help-title">Need Help?</div>
         <div class="help-text">
-            Don't worry! This is easy. Just fill in your website information above, click "Create My GTM Setup", and download your files. I'll guide you through each step!
+            Don't worry! This is easy. Just fill in your website information above, click "Create My Google Tag Setup", and download your files. I'll guide you through each step!
         </div>
         <button class="help-close" onclick="closeHelp()">Got it!</button>
     </div>
@@ -749,12 +749,12 @@
 
             // Simple validation for 88-year-old
             if (!websiteName || !websiteUrl || !gtmId || !ga4Id) {
-                alert('🤔 Please fill in all the boxes above. I need to know your website name, address, and your Google IDs to create your setup.');
+                alert('Please fill in all the boxes above. I need to know your website name, address, and your Google IDs to create your setup.');
                 return;
             }
 
             if (!selectedIndustry) {
-                alert('🎯 Please click on one of the website type buttons above. This helps me create the right setup for your type of website.');
+                alert('Please click on one of the website type buttons above. This helps me create the right setup for your type of website.');
                 return;
             }
 
