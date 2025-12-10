@@ -150,9 +150,6 @@ This is an open-source project. Contributions are welcome!
 4. Test thoroughly
 5. Submit a pull request
 
-## License
-
-MIT License - feel free to use this in your projects.
 
 ## Support
 
@@ -161,8 +158,3 @@ For support:
 - Visit [Google Tag Manager Help Center](https://support.google.com/tagmanager/)
 - Open an issue on GitHub
 
----
-
-**Note**: This tool generates GTM configurations locally. No data is sent to any server, ensuring complete privacy and security.
-
-Made with ❤️ for the web development community
