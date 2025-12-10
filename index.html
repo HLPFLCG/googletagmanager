@@ -898,181 +898,58 @@
         }
 
         function generateGTMConfig(name, url, gtmId, ga4Id, type) {
-            // Valid GTM config with all required fields
-            const timestamp = new Date().toISOString();
-            const fingerprint = Math.random().toString(36).substring(2, 15);
+            // Valid GTM config with exact format from working export
+            const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+            const fingerprint = Date.now().toString();
+            const accountId = "2000000000"; // Valid account ID format
             
             const config = {
-                "exportFormat": "GTM",
+                "exportFormatVersion": 2,
                 "exportTime": timestamp,
                 "containerVersion": {
-                    "path": "accounts/containers/versions",
-                    "accountId": "123456789",
+                    "path": `accounts/${accountId}/containers/${gtmId}/versions/1`,
+                    "accountId": accountId,
                     "containerId": gtmId,
                     "containerVersionId": "1",
-                    "name": "Version 1",
                     "container": {
-                        "path": "accounts/containers",
-                        "accountId": "123456789",
+                        "path": `accounts/${accountId}/containers/${gtmId}`,
+                        "accountId": accountId,
                         "containerId": gtmId,
                         "name": name,
                         "publicId": gtmId,
                         "usageContext": ["WEB"],
                         "fingerprint": fingerprint,
-                        "tagManagerUrl": `https://tagmanager.google.com/#/container/accounts/123456789/containers/${gtmId}/workspaces/1`
+                        "tagManagerUrl": `https://tagmanager.google.com/#/container/accounts/${accountId}/containers/${gtmId}/workspaces?apiLink=container`
                     },
                     "tag": [
                         {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/tags/1`,
-                            "accountId": "123456789",
+                            "accountId": accountId,
                             "containerId": gtmId,
                             "tagId": "1",
-                            "name": "GA4 Configuration - ${type}",
-                            "type": "GA4_CONFIG",
+                            "name": `GA4 Configuration - ${type}`,
+                            "type": "gaawc",
                             "parameter": [
                                 {
+                                    "type": "BOOLEAN",
                                     "key": "sendPageView",
-                                    "type": "boolean",
                                     "value": "true"
                                 },
                                 {
+                                    "type": "TEMPLATE",
                                     "key": "measurementId",
-                                    "type": "template",
                                     "value": ga4Id
                                 }
                             ],
+                            "fingerprint": fingerprint,
                             "firingTriggerId": ["2147479553"],
-                            "fingerprint": fingerprint,
-                            "parentFolderId": null
-                        },
-                        {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/tags/2`,
-                            "accountId": "123456789",
-                            "containerId": gtmId,
-                            "tagId": "2",
-                            "name": "GA4 Event - Page View",
-                            "type": "GA4_EVENT",
-                            "parameter": [
-                                {
-                                    "key": "eventName",
-                                    "type": "template",
-                                    "value": "page_view"
-                                },
-                                {
-                                    "key": "measurementId",
-                                    "type": "template",
-                                    "value": ga4Id
-                                }
-                            ],
-                            "firingTriggerId": ["2147479553"],
-                            "fingerprint": fingerprint,
-                            "parentFolderId": null
+                            "tagFiringOption": "ONCE_PER_EVENT"
                         }
                     ],
-                    "trigger": [
-                        {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/triggers/1`,
-                            "accountId": "123456789",
-                            "containerId": gtmId,
-                            "triggerId": "1",
-                            "name": "All Pages",
-                            "type": "PAGEVIEW",
-                            "fingerprint": fingerprint,
-                            "parentFolderId": null,
-                            "customEventFilter": [],
-                            "filter": [
-                                {
-                                    "type": "equals",
-                                    "parameter": [
-                                        {
-                                            "key": "url",
-                                            "type": "template",
-                                            "value": "{{Page URL}}"
-                                        },
-                                        {
-                                            "key": "matchRegex",
-                                            "type": "template",
-                                            "value": ".*"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "waitForTags": {
-                                "type": "never",
-                                "name": null
-                            },
-                            "checkValidation": {
-                                "type": "never",
-                                "name": null
-                            }
-                        }
-                    ],
-                    "variable": [
-                        {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/variables/1`,
-                            "accountId": "123456789",
-                            "containerId": gtmId,
-                            "variableId": "1",
-                            "name": "Page URL",
-                            "type": "PAGE_URL",
-                            "parameter": [
-                                {
-                                    "key": "urlParts",
-                                    "type": "list",
-                                    "list": [
-                                        {
-                                            "type": "template",
-                                            "value": "PATH"
-                                        },
-                                        {
-                                            "type": "template",
-                                            "value": "QUERY"
-                                        },
-                                        {
-                                            "type": "template",
-                                            "value": "FRAGMENT"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "key": "queryKeys",
-                                    "type": "list",
-                                    "list": []
-                                }
-                            ],
-                            "fingerprint": fingerprint,
-                            "parentFolderId": null,
-                            "formatValue": {
-                                "type": "none",
-                                "name": null
-                            }
-                        }
-                    ],
-                    "builtInVariable": [
-                        {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/built_in_variables/1`,
-                            "accountId": "123456789",
-                            "containerId": gtmId,
-                            "builtInVariableId": "1",
-                            "name": "Page URL",
-                            "type": "PAGE_URL"
-                        },
-                        {
-                            "path": `accounts/123456789/containers/${gtmId}/workspaces/1/built_in_variables/2`,
-                            "accountId": "123456789",
-                            "containerId": gtmId,
-                            "builtInVariableId": "2",
-                            "name": "Page Hostname",
-                            "type": "PAGE_HOSTNAME"
-                        }
-                    ],
+                    "trigger": [],
+                    "variable": [],
                     "folder": [],
-                    "changeSummary": {
-                        "variable": [],
-                        "trigger": [],
-                        "tag": ["GA4 Configuration - ${type}", "GA4 Event - Page View"]
-                    },
-                    "fingerprint": fingerprint
+                    "fingerprint": fingerprint,
+                    "tagManagerUrl": `https://tagmanager.google.com/#/versions/accounts/${accountId}/containers/${gtmId}/versions/1?apiLink=version`
                 }
             };
 
