@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Template System - One-Click Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+
+        .site-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .site-type-card {
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .site-type-card:hover {
+            border-color: #4285f4;
+            background: #f8f9ff;
+        }
+
+        .site-type-card.selected {
+            border-color: #4285f4;
+            background: #e8f0fe;
+        }
+
+        .site-type-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .download-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background: white;
+            border: 2px solid #4285f4;
+            color: #4285f4;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .download-btn:hover {
+            background: #4285f4;
+            color: white;
+        }
+
+        .preview-code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: #4285f4;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .security-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .site-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚀 GTM Template System</h1>
+            <p>One-Click Google Tag Manager Setup for Any Website</p>
+        </header>
+
+        <main class="main-content">
+            <div class="security-notice">
+                <strong>🔒 Secure Processing:</strong> All configurations are generated locally in your browser. No data is sent to external servers.
+            </div>
+
+            <section class="form-section">
+                <h2>📋 Website Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="website-name">Website Name</label>
+                    <input type="text" id="website-name" placeholder="My Awesome Website" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="website-url">Website URL</label>
+                    <input type="url" id="website-url" placeholder="https://example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gtm-id">Google Tag Manager ID</label>
+                    <input type="text" id="gtm-id" placeholder="GTM-XXXXXXX" pattern="GTM-[A-Z0-9]+" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ga4-id">Google Analytics 4 ID</label>
+                    <input type="text" id="ga4-id" placeholder="G-XXXXXXXXXX" pattern="G-[A-Z0-9]+" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Your Website Type</label>
+                    <div class="site-types">
+                        <div class="site-type-card" data-type="portfolio">
+                            <div class="icon">🎨</div>
+                            <h3>Portfolio</h3>
+                            <p>Showcase projects & work</p>
+                        </div>
+                        <div class="site-type-card" data-type="ecommerce">
+                            <div class="icon">🛒</div>
+                            <h3>E-commerce</h3>
+                            <p>Online store & products</p>
+                        </div>
+                        <div class="site-type-card" data-type="business">
+                            <div class="icon">🏢</div>
+                            <h3>Business</h3>
+                            <p>Company & services</p>
+                        </div>
+                        <div class="site-type-card" data-type="blog">
+                            <div class="icon">📝</div>
+                            <h3>Blog</h3>
+                            <p>Content & articles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="custom-events">Custom Events (optional)</label>
+                    <textarea id="custom-events" rows="3" placeholder="button_click, form_submit, video_play"></textarea>
+                </div>
+            </section>
+
+            <button class="generate-btn" onclick="generateGTMTemplates()">
+                🚀 Generate GTM Templates
+            </button>
+
+            <section class="results-section" id="results">
+                <h2>📦 Your GTM Configuration Ready!</h2>
+                <p>Your custom Google Tag Manager setup has been generated. Download all files below:</p>
+                
+                <div class="download-buttons">
+                    <button class="download-btn" onclick="downloadFile('gtm-config.json')">
+                        📄 GTM Configuration
+                    </button>
+                    <button class="download-btn" onclick="downloadFile('analytics.js')">
+                        📊 Analytics Script
+                    </button>
+                    <button class="download-btn" onclick="downloadFile('data-layer.js')">
+                        🗂️ Data Layer Setup
+                    </button>
+                    <button class="download-btn" onclick="downloadFile('installation.html')">
+                        📋 Installation Guide
+                    </button>
+                    <button class="download-btn" onclick="downloadAllFiles()">
+                        📦 Download All Files (ZIP)
+                    </button>
+                </div>
+
+                <div class="preview-code" id="preview">
+                    <!-- Preview will be inserted here -->
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate complete GTM setup in seconds, not hours</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎯</div>
+                    <h3>Pre-configured</h3>
+                    <p>15+ Data Layer Variables and Custom JavaScript Variables ready</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔧</div>
+                    <h3>Customizable</h3>
+                    <p>Tailored configurations for different website types</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Mobile Ready</h3>
+                    <p>Responsive design works on all devices</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔒</div>
+                    <h3>Secure</h3>
+                    <p>All processing happens locally in your browser</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📈</div>
+                    <h3>Analytics Ready</h3>
+                    <p>Complete tracking for engagement, conversions, and more</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        // Site type selection
+        document.querySelectorAll('.site-type-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.site-type-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        let generatedFiles = {};
+
+        function generateGTMTemplates() {
+            const websiteName = document.getElementById('website-name').value;
+            const websiteUrl = document.getElementById('website-url').value;
+            const gtmId = document.getElementById('gtm-id').value;
+            const ga4Id = document.getElementById('ga4-id').value;
+            const selectedType = document.querySelector('.site-type-card.selected');
+            const customEvents = document.getElementById('custom-events').value;
+
+            if (!websiteName || !websiteUrl || !gtmId || !ga4Id || !selectedType) {
+                alert('Please fill in all required fields and select a website type.');
+                return;
+            }
+
+            const siteType = selectedType.dataset.type;
+            
+            // Generate GTM Configuration
+            generatedFiles['gtm-config.json'] = generateGTMConfig(websiteName, websiteUrl, gtmId, ga4Id, siteType, customEvents);
+            
+            // Generate Analytics Script
+            generatedFiles['analytics.js'] = generateAnalyticsScript(gtmId, ga4Id, siteType);
+            
+            // Generate Data Layer Setup
+            generatedFiles['data-layer.js'] = generateDataLayerSetup(siteType);
+            
+            // Generate Installation Guide
+            generatedFiles['installation.html'] = generateInstallationGuide(websiteName, gtmId, ga4Id);
+
+            // Show results
+            document.getElementById('results').classList.add('active');
+            document.getElementById('preview').textContent = JSON.stringify(JSON.parse(generatedFiles['gtm-config.json']), null, 2);
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateGTMConfig(name, url, gtmId, ga4Id, type, customEvents) {
+            const config = {
+                website: {
+                    name: name,
+                    url: url,
+                    type: type
+                },
+                gtm: {
+                    containerId: gtmId
+                },
+                ga4: {
+                    measurementId: ga4Id
+                },
+                dataLayerVariables: [
+                    { name: "email_address", type: "Data Layer Variable" },
+                    { name: "social_platform", type: "Data Layer Variable" },
+                    { name: "destination_url", type: "Data Layer Variable" },
+                    { name: "link_category", type: "Data Layer Variable" },
+                    { name: "button_text", type: "Data Layer Variable" },
+                    { name: "form_name", type: "Data Layer Variable" },
+                    { name: "page_category", type: "Data Layer Variable" },
+                    { name: "user_type", type: "Data Layer Variable" },
+                    { name: "session_source", type: "Data Layer Variable" },
+                    { name: "engagement_time", type: "Data Layer Variable" },
+                    { name: "scroll_depth", type: "Data Layer Variable" },
+                    { name: "download_url", type: "Data Layer Variable" },
+                    { name: "video_title", type: "Data Layer Variable" },
+                    { name: "product_id", type: "Data Layer Variable" },
+                    { name: "transaction_value", type: "Data Layer Variable" }
+                ],
+                customJavaScriptVariables: [
+                    { name: "Traffic Source", code: "function() { return document.referrer || 'direct'; }" },
+                    { name: "Preferred Social Platform", code: "function() { /* Platform detection logic */ return 'unknown'; }" },
+                    { name: "Link Category", code: "function() { /* Category detection logic */ return 'general'; }" }
+                ],
+                triggers: getTriggersForType(type, customEvents),
+                tags: getTagsForType(type, gtmId, ga4Id)
+            };
+
+            return JSON.stringify(config, null, 2);
+        }
+
+        function getTriggersForType(type, customEvents) {
+            const baseTriggers = [
+                { name: "All Pages", type: "Page View" },
+                { name: "Click - All Links", type: "Click - All Elements" },
+                { name: "Form Submit", type: "Form Submission" },
+                { name: "Scroll Depth 25%", type: "Scroll Depth" },
+                { name: "Scroll Depth 50%", type: "Scroll Depth" },
+                { name: "Scroll Depth 75%", type: "Scroll Depth" },
+                { name: "Scroll Depth 90%", type: "Scroll Depth" }
+            ];
+
+            const typeSpecific = {
+                portfolio: [
+                    { name: "Project View", type: "Custom Event", eventName: "project_view" },
+                    { name: "Gallery Click", type: "Custom Event", eventName: "gallery_click" }
+                ],
+                ecommerce: [
+                    { name: "Product View", type: "Custom Event", eventName: "view_item" },
+                    { name: "Add to Cart", type: "Custom Event", eventName: "add_to_cart" },
+                    { name: "Purchase", type: "Custom Event", eventName: "purchase" }
+                ],
+                business: [
+                    { name: "Lead Generated", type: "Custom Event", eventName: "lead" },
+                    { name: "Consultation Booking", type: "Custom Event", eventName: "consultation" },
+                    { name: "Demo Request", type: "Custom Event", eventName: "demo_request" }
+                ],
+                blog: [
+                    { name: "Article View", type: "Custom Event", eventName: "article_view" },
+                    { name: "Article Complete", type: "Custom Event", eventName: "article_complete" },
+                    { name: "Social Share", type: "Custom Event", eventName: "social_share" }
+                ]
+            };
+
+            return [...baseTriggers, ...(typeSpecific[type] || [])];
+        }
+
+        function getTagsForType(type, gtmId, ga4Id) {
+            const baseTags = [
+                { name: "GA4 - Config", type: "Google Analytics: GA4 Configuration", measurementId: ga4Id },
+                { name: "GA4 - Page View", type: "Google Analytics: GA4 Event", eventName: "page_view" }
+            ];
+
+            const typeSpecific = {
+                portfolio: [
+                    { name: "GA4 - Project View", type: "Google Analytics: GA4 Event", eventName: "project_view" },
+                    { name: "GA4 - Gallery Click", type: "Google Analytics: GA4 Event", eventName: "gallery_click" }
+                ],
+                ecommerce: [
+                    { name: "GA4 - View Item", type: "Google Analytics: GA4 Event", eventName: "view_item" },
+                    { name: "GA4 - Add to Cart", type: "Google Analytics: GA4 Event", eventName: "add_to_cart" },
+                    { name: "GA4 - Purchase", type: "Google Analytics: GA4 Event", eventName: "purchase" }
+                ],
+                business: [
+                    { name: "GA4 - Lead", type: "Google Analytics: GA4 Event", eventName: "lead" },
+                    { name: "GA4 - Consultation", type: "Google Analytics: GA4 Event", eventName: "consultation" },
+                    { name: "GA4 - Demo Request", type: "Google Analytics: GA4 Event", eventName: "demo_request" }
+                ],
+                blog: [
+                    { name: "GA4 - Article View", type: "Google Analytics: GA4 Event", eventName: "article_view" },
+                    { name: "GA4 - Article Complete", type: "Google Analytics: GA4 Event", eventName: "article_complete" },
+                    { name: "GA4 - Social Share", type: "Google Analytics: GA4 Event", eventName: "social_share" }
+                ]
+            };
+
+            return [...baseTags, ...(typeSpecific[type] || [])];
+        }
+
+        function generateAnalyticsScript(gtmId, ga4Id, type) {
+            return `// Google Tag Manager & Analytics Script for ${type}
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');
+
+// Enhanced Analytics Tracking
+class UniversalAnalytics {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.trackPageView();
+        this.trackScrollDepth();
+        this.trackEngagement();
+        this.trackOutboundLinks();
+        this.trackDownloads();
+        this.trackForms();
+        ${this.getTypeSpecificTracking(type)}
+    }
+
+    trackPageView() {
+        dataLayer.push({
+            event: 'page_view',
+            page_title: document.title,
+            page_location: window.location.href
+        });
+    }
+
+    trackScrollDepth() {
+        let maxScroll = 0;
+        const thresholds = [25, 50, 75, 90];
+
+        window.addEventListener('scroll', () => {
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                thresholds.forEach(threshold => {
+                    if (scrollPercent >= threshold && !this[\`scrollFired\${threshold}\`]) {
+                        this[\`scrollFired\${threshold}\`] = true;
+                        dataLayer.push({
+                            event: 'scroll_depth',
+                            scroll_threshold: threshold
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    trackEngagement() {
+        let startTime = Date.now();
+        let isActive = true;
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isActive = false;
+                this.sendEngagementTime(Date.now() - startTime);
+            } else {
+                isActive = true;
+                startTime = Date.now();
+            }
+        });
+
+        setInterval(() => {
+            if (isActive) {
+                this.sendEngagementTime(Date.now() - startTime);
+            }
+        }, 30000); // Send every 30 seconds
+    }
+
+    sendEngagementTime(time) {
+        dataLayer.push({
+            event: 'engagement_time',
+            engagement_duration_ms: time
+        });
+    }
+
+    trackOutboundLinks() {
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && link.href && link.hostname !== window.location.hostname) {
+                dataLayer.push({
+                    event: 'outbound_click',
+                    destination_url: link.href,
+                    link_text: link.textContent
+                });
+            }
+        });
+    }
+
+    trackDownloads() {
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && link.href) {
+                const downloadExtensions = ['.pdf', '.doc', '.docx', '.zip', '.exe', '.dmg'];
+                const isDownload = downloadExtensions.some(ext => link.href.includes(ext));
+                
+                if (isDownload) {
+                    dataLayer.push({
+                        event: 'file_download',
+                        download_url: link.href,
+                        file_name: link.href.split('/').pop()
+                    });
+                }
+            }
+        });
+    }
+
+    trackForms() {
+        document.addEventListener('submit', (e) => {
+            const form = e.target;
+            dataLayer.push({
+                event: 'form_submit',
+                form_name: form.name || form.id || 'unnamed_form',
+                form_action: form.action
+            });
+        });
+    }
+
+    ${this.getTypeSpecificMethods(type)}
+}
+
+// Initialize analytics when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new UniversalAnalytics();
+});`;
+        }
+
+        function getTypeSpecificTracking(type) {
+            const tracking = {
+                portfolio: `
+    trackPortfolioInteractions() {
+        // Track project views
+        document.addEventListener('click', (e) => {
+            const project = e.target.closest('.project-item, .portfolio-item');
+            if (project) {
+                dataLayer.push({
+                    event: 'project_view',
+                    project_title: project.dataset.title || project.querySelector('h3')?.textContent
+                });
+            }
+        });
+
+        // Track gallery interactions
+        document.addEventListener('click', (e) => {
+            const galleryItem = e.target.closest('.gallery-item, .image-item');
+            if (galleryItem) {
+                dataLayer.push({
+                    event: 'gallery_click',
+                    image_title: galleryItem.dataset.title || galleryItem.querySelector('img')?.alt
+                });
+            }
+        });
+    }`,
+                ecommerce: `
+    trackEcommerceEvents() {
+        // Track product views
+        document.addEventListener('click', (e) => {
+            const product = e.target.closest('.product-item, .product-card');
+            if (product) {
+                dataLayer.push({
+                    event: 'view_item',
+                    item_id: product.dataset.id,
+                    item_name: product.dataset.name || product.querySelector('h3')?.textContent,
+                    price: product.dataset.price
+                });
+            }
+        });
+
+        // Track add to cart
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.add-to-cart, [data-action="add-to-cart"]')) {
+                const product = e.target.closest('.product-item, .product-card');
+                dataLayer.push({
+                    event: 'add_to_cart',
+                    item_id: product?.dataset.id,
+                    item_name: product?.dataset.name
+                });
+            }
+        });
+    }`,
+                business: `
+    trackBusinessEvents() {
+        // Track lead generation
+        document.addEventListener('submit', (e) => {
+            const form = e.target;
+            if (form.classList.contains('contact-form') || form.id.includes('contact')) {
+                dataLayer.push({
+                    event: 'lead',
+                    lead_type: 'contact_form',
+                    form_name: form.name || form.id
+                });
+            }
+        });
+
+        // Track consultation bookings
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.book-consultation, [data-action="consultation"]')) {
+                dataLayer.push({
+                    event: 'consultation',
+                    consultation_type: e.target.dataset.type || 'general'
+                });
+            }
+        });
+    }`,
+                blog: `
+    trackBlogEvents() {
+        // Track article views
+        if (document.querySelector('.article-content, .post-content')) {
+            dataLayer.push({
+                event: 'article_view',
+                article_title: document.title,
+                author: document.querySelector('.author')?.textContent,
+                publish_date: document.querySelector('.publish-date')?.textContent
+            });
+        }
+
+        // Track social shares
+        document.addEventListener('click', (e) => {
+            const shareButton = e.target.closest('.social-share, [data-social]');
+            if (shareButton) {
+                dataLayer.push({
+                    event: 'social_share',
+                    social_platform: shareButton.dataset.social || shareButton.textContent.toLowerCase()
+                });
+            }
+        });
+    }`
+            };
+
+            return tracking[type] || '';
+        }
+
+        function getTypeSpecificMethods(type) {
+            const methods = {
+                portfolio: 'this.trackPortfolioInteractions();',
+                ecommerce: 'this.trackEcommerceEvents();',
+                business: 'this.trackBusinessEvents();',
+                blog: 'this.trackBlogEvents();'
+            };
+
+            return methods[type] || '';
+        }
+
+        function generateDataLayerSetup(type) {
+            return `// Data Layer Setup for ${type}
+// Initialize data layer
+window.dataLayer = window.dataLayer || [];
+
+// Page information
+dataLayer.push({
+    page_type: '${type}',
+    page_title: document.title,
+    page_url: window.location.href,
+    timestamp: new Date().toISOString()
+});
+
+// User information (to be populated dynamically)
+function updateUserData(userData) {
+    dataLayer.push({
+        user_id: userData.id,
+        user_type: userData.type || 'visitor',
+        login_status: userData.loggedIn || false,
+        email_address: userData.email
+    });
+}
+
+// Ecommerce data (for ecommerce sites)
+function trackEcommerceEvent(event, data) {
+    const ecommerceData = {
+        event: event,
+        ecommerce: data
+    };
+    dataLayer.push(ecommerceData);
+}
+
+// Custom event tracking
+function trackCustomEvent(eventName, parameters) {
+    dataLayer.push({
+        event: eventName,
+        ...parameters
+    });
+}
+
+// Traffic source detection
+function detectTrafficSource() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmSource = urlParams.get('utm_source');
+    const utmMedium = urlParams.get('utm_medium');
+    const utmCampaign = urlParams.get('utm_campaign');
+    
+    const trafficData = {
+        session_source: utmSource || document.referrer || 'direct',
+        session_medium: utmMedium || 'none',
+        session_campaign: utmCampaign || 'none'
+    };
+    
+    dataLayer.push(trafficData);
+    return trafficData;
+}
+
+// Initialize traffic source detection
+detectTrafficSource();`;
+        }
+
+        function generateInstallationGuide(name, gtmId, ga4Id) {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Installation Guide - ${name}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .step { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; }
+        code { background: #e0e0e0; padding: 2px 4px; border-radius: 3px; }
+        .code-block { background: #1e1e1e; color: #fff; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🚀 GTM Installation Guide for ${name}</h1>
+    
+    <div class="step">
+        <h2>Step 1: Add GTM to Your Website</h2>
+        <p>Place this code immediately after the opening &lt;body&gt; tag on every page:</p>
+        <div class="code-block">
+&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</div>
+    </div>
+
+    <div class="step">
+        <h2>Step 2: Add GTM Noscript</h2>
+        <p>Place this code immediately after the opening &lt;body&gt; tag on every page:</p>
+        <div class="code-block">
+&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</div>
+    </div>
+
+    <div class="step">
+        <h2>Step 3: Import GTM Configuration</h2>
+        <ol>
+            <li>Go to <a href="https://tagmanager.google.com/">Google Tag Manager</a></li>
+            <li>Select your container (${gtmId})</li>
+            <li>Go to Admin &gt; Import Container</li>
+            <li>Upload the gtm-config.json file</li>
+            <li>Choose "Overwrite" option</li>
+            <li>Click "Import" and then "Confirm"</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>Step 4: Add Analytics Script</h2>
+        <p>Add the analytics.js file to your website's JavaScript bundle or include it before closing &lt;/body&gt; tag:</p>
+        <div class="code-block">
+&lt;script src="analytics.js"&gt;&lt;/script&gt;</div>
+    </div>
+
+    <div class="step">
+        <h2>Step 5: Test Your Setup</h2>
+        <ol>
+            <li>Install <a href="https://chrome.google.com/webstore/detail/tag-assistant-legacy/gjekgkmlpooafbcelfipelhkphfdnpcb">Tag Assistant</a> Chrome extension</li>
+            <li>Navigate to your website</li>
+            <li>Check for proper GTM firing</li>
+            <li>Verify GA4 events are being sent</li>
+            <li>Test different user interactions (clicks, form submissions, etc.)</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>Step 6: Submit for Publishing</h2>
+        <ol>
+            <li>Go to GTM Preview mode</li>
+            <li>Test all tags and triggers</li>
+            <li>Once verified, click "Submit"</li>
+            <li>Add version description (e.g., "Initial GTM setup for ${name}")</li>
+            <li>Publish your changes</li>
+        </ol>
+    </div>
+
+    <h2>🎯 Next Steps</h2>
+    <ul>
+        <li>Monitor your GA4 property for incoming data</li>
+        <li>Set up custom reports and dashboards</li>
+        <li>Configure conversion tracking</li>
+        <li>Set up audiences for retargeting</li>
+    </ul>
+
+    <h2>📞 Support</h2>
+    <p>If you need help with the installation, check the <a href="https://support.google.com/tagmanager/">Google Tag Manager Help Center</a>.</p>
+</body>
+</html>`;
+        }
+
+        function downloadFile(filename) {
+            const content = generatedFiles[filename];
+            if (!content) {
+                alert('File not generated yet. Please click "Generate GTM Templates" first.');
+                return;
+            }
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        function downloadAllFiles() {
+            if (Object.keys(generatedFiles).length === 0) {
+                alert('No files generated yet. Please click "Generate GTM Templates" first.');
+                return;
+            }
+
+            const zip = new JSZip();
+            
+            Object.keys(generatedFiles).forEach(filename => {
+                zip.file(filename, generatedFiles[filename]);
+            });
+
+            zip.generateAsync({ type: "blob" }).then(function(content) {
+                saveAs(content, "gtm-template-system.zip");
+            });
+        }
+    </script>
+</body>
+</html>
