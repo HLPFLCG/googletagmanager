@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTM Template System - One-Click Setup</title>
+    <title>GTM Template System - Google Tag Manager Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,54 +13,90 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #202124;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 100%;
+            margin: 0;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            min-height: 100vh;
         }
 
         .header {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            background: #fff;
+            border-bottom: 1px solid #e8eaed;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 22px;
+            font-weight: 400;
+            color: #5f6368;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #4285f4;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 40px;
-            text-align: center;
+            font-size: 20px;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
+        .header-nav {
+            display: flex;
+            gap: 24px;
         }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .header-nav a {
+            color: #5f6368;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .header-nav a:hover {
+            background-color: #f1f3f4;
         }
 
         .main-content {
-            padding: 40px;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .form-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background: #fff;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
         }
 
         .form-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            color: #202124;
+            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .form-group {
@@ -77,11 +114,13 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            font-family: 'Roboto', Arial, sans-serif;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fff;
         }
 
         .form-group input:focus,
@@ -89,6 +128,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: #4285f4;
+            box-shadow: 0 1px 6px rgba(66, 133, 244, 0.3);
         }
 
         .site-types {
@@ -99,22 +139,24 @@
         }
 
         .site-type-card {
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: center;
+            background: #fff;
         }
 
         .site-type-card:hover {
             border-color: #4285f4;
-            background: #f8f9ff;
+            background: #f8f9fa;
         }
 
         .site-type-card.selected {
             border-color: #4285f4;
             background: #e8f0fe;
+            box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
         }
 
         .site-type-card .icon {
@@ -123,22 +165,31 @@
         }
 
         .generate-btn {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            background: #4285f4;
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
+            padding: 0 24px;
+            height: 36px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: block;
-            margin: 30px auto;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
         }
 
         .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
+            background: #357ae8;
+            box-shadow: 0 1px 2px rgba(66, 133, 244, 0.3);
+        }
+
+        .generate-btn-container {
+            text-align: center;
+            margin: 24px 0;
         }
 
         .results-section {
@@ -230,16 +281,103 @@
             margin-bottom: 20px;
         }
 
+        .framework-section {
+            margin: 32px 0;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .framework-card {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            background: #fff;
+            transition: all 0.2s;
+        }
+
+        .framework-card:hover {
+            border-color: #4285f4;
+            box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
+        }
+
+        .framework-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .framework-card h3 {
+            font-size: 18px;
+            font-weight: 500;
+            color: #202124;
+            margin: 8px 0;
+        }
+
+        .framework-card p {
+            font-size: 14px;
+            color: #5f6368;
+            margin: 0 0 16px 0;
+        }
+
+        .framework-btn {
+            background: #fff;
+            border: 1px solid #dadce0;
+            color: #1a73e8;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .framework-btn:hover {
+            background: #f8f9fa;
+            border-color: #1a73e8;
+        }
+
+        .security-notice {
+            background: #fef7e0;
+            border: 1px solid #fbbc04;
+            color: #3c4043;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .security-notice::before {
+            content: "🔒";
+            font-size: 20px;
+        }
+
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
+            .header {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .header-nav {
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .main-content {
-                padding: 20px;
+                padding: 16px;
             }
             
             .site-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .framework-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -248,9 +386,27 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>🚀 GTM Template System</h1>
-            <p>One-Click Google Tag Manager Setup for Any Website</p>
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <span>GTM Template System</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#" onclick="showSection('setup')">Setup</a>
+                <a href="#" onclick="showSection('docs')">Documentation</a>
+                <a href="#" onclick="showSection('support')">Support</a>
+            </nav>
         </header>
+        
+        <div class="google-subheader">
+            <div class="main-content">
+                <h1 style="font-size: 32px; font-weight: 400; margin: 24px 0 16px 0; color: #202124;">
+                    Google Tag Manager Setup
+                </h1>
+                <p style="font-size: 16px; color: #5f6368; margin: 0 0 24px 0;">
+                    Configure GTM for your website in minutes with pre-built templates
+                </p>
+            </div>
+        </div>
 
         <main class="main-content">
             <div class="security-notice">
@@ -312,9 +468,11 @@
                 </div>
             </section>
 
-            <button class="generate-btn" onclick="generateGTMTemplates()">
-                🚀 Generate GTM Templates
-            </button>
+            <div class="generate-btn-container">
+                <button class="generate-btn" onclick="generateGTMTemplates()">
+                    Generate GTM Templates
+                </button>
+            </div>
 
             <section class="results-section" id="results">
                 <h2>📦 Your GTM Configuration Ready!</h2>
@@ -427,43 +585,178 @@
         }
 
         function generateGTMConfig(name, url, gtmId, ga4Id, type, customEvents) {
+            // Google Tag Manager Export Format
             const config = {
-                website: {
-                    name: name,
-                    url: url,
-                    type: type
-                },
-                gtm: {
-                    containerId: gtmId
-                },
-                ga4: {
-                    measurementId: ga4Id
-                },
-                dataLayerVariables: [
-                    { name: "email_address", type: "Data Layer Variable" },
-                    { name: "social_platform", type: "Data Layer Variable" },
-                    { name: "destination_url", type: "Data Layer Variable" },
-                    { name: "link_category", type: "Data Layer Variable" },
-                    { name: "button_text", type: "Data Layer Variable" },
-                    { name: "form_name", type: "Data Layer Variable" },
-                    { name: "page_category", type: "Data Layer Variable" },
-                    { name: "user_type", type: "Data Layer Variable" },
-                    { name: "session_source", type: "Data Layer Variable" },
-                    { name: "engagement_time", type: "Data Layer Variable" },
-                    { name: "scroll_depth", type: "Data Layer Variable" },
-                    { name: "download_url", type: "Data Layer Variable" },
-                    { name: "video_title", type: "Data Layer Variable" },
-                    { name: "product_id", type: "Data Layer Variable" },
-                    { name: "transaction_value", type: "Data Layer Variable" }
-                ],
-                customJavaScriptVariables: [
-                    { name: "Traffic Source", code: "function() { return document.referrer || 'direct'; }" },
-                    { name: "Preferred Social Platform", code: "function() { /* Platform detection logic */ return 'unknown'; }" },
-                    { name: "Link Category", code: "function() { /* Category detection logic */ return 'general'; }" }
-                ],
-                triggers: getTriggersForType(type, customEvents),
-                tags: getTagsForType(type, gtmId, ga4Id)
+                "exportFormat": "GTM",
+                "exportTime": new Date().toISOString(),
+                "containerVersion": {
+                    "path": "accounts/containers/versions",
+                    "accountId": "",
+                    "containerId": gtmId,
+                    "containerVersionId": "1",
+                    "container": {
+                        "path": "accounts/containers",
+                        "accountId": "",
+                        "containerId": gtmId,
+                        "name": name,
+                        "publicId": gtmId,
+                        "usageContext": ["WEB"],
+                        "fingerprint": "",
+                        "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/containers/workspaces"
+                    },
+                    "tag": [],
+                    "trigger": [],
+                    "variable": []
+                }
             };
+
+            // Add Data Layer Variables
+            const dlvNames = [
+                "email_address", "social_platform", "destination_url", "link_category",
+                "button_text", "form_name", "page_category", "user_type", "session_source",
+                "engagement_time", "scroll_depth", "download_url", "video_title", 
+                "product_id", "transaction_value"
+            ];
+
+            dlvNames.forEach((name, index) => {
+                config.containerVersion.variable.push({
+                    "path": "accounts/containers/versions/variables",
+                    "accountId": "",
+                    "containerId": gtmId,
+                    "variableId": (index + 1).toString(),
+                    "name": name,
+                    "type": "d",
+                    "parameter": [{
+                        "type": "integer",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    }, {
+                        "type": "boolean",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    }, {
+                        "type": "template",
+                        "key": "name",
+                        "value": name
+                    }],
+                    "fingerprint": ""
+                });
+            });
+
+            // Add Custom JavaScript Variables
+            const jsVars = [
+                {
+                    name: "Traffic Source",
+                    code: "function() { return document.referrer || 'direct'; }"
+                },
+                {
+                    name: "Preferred Social Platform", 
+                    code: "function() { if (window.location.hostname.includes('facebook')) return 'facebook'; if (window.location.hostname.includes('twitter')) return 'twitter'; if (window.location.hostname.includes('instagram')) return 'instagram'; return 'unknown'; }"
+                },
+                {
+                    name: "Link Category",
+                    code: "function() { var href = document.location.href; if (href.includes('/product/')) return 'product'; if (href.includes('/blog/')) return 'blog'; if (href.includes('/contact')) return 'contact'; return 'general'; }"
+                }
+            ];
+
+            jsVars.forEach((jsVar, index) => {
+                config.containerVersion.variable.push({
+                    "path": "accounts/containers/versions/variables",
+                    "accountId": "",
+                    "containerId": gtmId,
+                    "variableId": (dlvNames.length + index + 1).toString(),
+                    "name": jsVar.name,
+                    "type": "jsm",
+                    "parameter": [{
+                        "type": "template",
+                        "key": "javascript",
+                        "value": jsVar.code
+                    }],
+                    "fingerprint": ""
+                });
+            });
+
+            // Add GA4 Configuration Tag
+            config.containerVersion.tag.push({
+                "path": "accounts/containers/versions/tags",
+                "accountId": "",
+                "containerId": gtmId,
+                "tagId": "1",
+                "name": "GA4 Configuration",
+                "type": "gaw",
+                "parameter": [{
+                    "type": "template",
+                    "key": "measurementId",
+                    "value": ga4Id
+                }, {
+                    "type": "boolean",
+                    "key": "sendPageView",
+                    "value": "true"
+                }, {
+                    "type": "boolean",
+                    "key": "enableSendToServerContainer",
+                    "value": "false"
+                }],
+                "fingerprint": "",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            });
+
+            // Add Triggers
+            const triggers = [
+                {
+                    "name": "All Pages",
+                    "type": "PAGEVIEW",
+                    "triggerId": "1"
+                },
+                {
+                    "name": "Click - All Links",
+                    "type": "CLICK",
+                    "triggerId": "2",
+                    "parameter": [{
+                        "type": "boolean",
+                        "key": "waitForTags",
+                        "value": "false"
+                    }, {
+                        "type": "boolean",
+                        "key": "checkValidation",
+                        "value": "true"
+                    }, {
+                        "type": "boolean",
+                        "key": "waitForTagsTimeout",
+                        "value": "2000"
+                    }]
+                },
+                {
+                    "name": "Form Submit",
+                    "type": "FORM_SUBMIT", 
+                    "triggerId": "3",
+                    "parameter": [{
+                        "type": "boolean",
+                        "key": "waitForTags",
+                        "value": "false"
+                    }, {
+                        "type": "boolean",
+                        "key": "checkValidation",
+                        "value": "true"
+                    }]
+                }
+            ];
+
+            triggers.forEach(trigger => {
+                config.containerVersion.trigger.push({
+                    "path": "accounts/containers/versions/triggers",
+                    "accountId": "",
+                    "containerId": gtmId,
+                    "triggerId": trigger.triggerId,
+                    "name": trigger.name,
+                    "type": trigger.type,
+                    "parameter": trigger.parameter || [],
+                    "fingerprint": ""
+                });
+            });
 
             return JSON.stringify(config, null, 2);
         }
@@ -933,8 +1226,37 @@ height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&l
         <li>Set up audiences for retargeting</li>
     </ul>
 
+    <h2>🔧 React & Next.js Integration</h2>
+    <p>For modern JavaScript frameworks like React, Next.js, or sites built with .js/.tsx files, follow our comprehensive integration guide:</p>
+    
+    <div class="code-block">
+# Next.js Integration (Recommended)
+npm install @gtm-support/react-gtm
+
+# Add to _app.js
+import TagManager from '@gtm-support/react-gtm';
+TagManager.initialize({ gtmId: '${gtmId}' });
+
+# Add to _document.js for noscript
+&lt;iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"&gt;&lt;/iframe&gt;
+
+# Track custom events
+window.dataLayer.push({
+  event: 'custom_event',
+  parameter: 'value'
+});
+    </div>
+
+    <h3>📱 Framework-Specific Setup</h3>
+    <ul>
+        <li><strong>Next.js</strong>: Use _app.js and _document.js for optimal setup</li>
+        <li><strong>React</strong>: Create custom hooks for event tracking</li>
+        <li><strong>TypeScript</strong>: Use typed interfaces for GTM events</li>
+        <li><strong>Vanilla JS</strong>: Use GTM Manager class for any framework</li>
+    </ul>
+
     <h2>📞 Support</h2>
-    <p>If you need help with the installation, check the <a href="https://support.google.com/tagmanager/">Google Tag Manager Help Center</a>.</p>
+    <p>For help with the installation, check the <a href="https://support.google.com/tagmanager/">Google Tag Manager Help Center</a> or our comprehensive React/Next.js integration guide.</p>
 </body>
 </html>`;
         }
@@ -972,6 +1294,30 @@ height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&l
             zip.generateAsync({ type: "blob" }).then(function(content) {
                 saveAs(content, "gtm-template-system.zip");
             });
+        }
+
+        function showReactGuide() {
+            alert('React Integration Guide:\n\n1. Install: npm install @gtm-support/react-gtm\n2. Create GTM context provider\n3. Use custom hooks for tracking\n4. Add to your app component\n\nFull guide included in your download package!');
+        }
+
+        function showNextGuide() {
+            alert('Next.js Integration Guide:\n\n1. Add GTM to _app.js\n2. Add noscript to _document.js\n3. Track route changes\n4. Use for SSR compatibility\n\nFull guide included in your download package!');
+        }
+
+        function showTSGuide() {
+            alert('TypeScript Integration Guide:\n\n1. Define GTM event interfaces\n2. Type-safe data layer\n3. Generic tracking utilities\n4. End-to-end type safety\n\nFull guide included in your download package!');
+        }
+
+        function showVanillaGuide() {
+            alert('Vanilla JS Integration Guide:\n\n1. Create GTM Manager class\n2. Initialize on app load\n3. Track custom events\n4. Works with any framework\n\nFull guide included in your download package!');
+        }
+
+        function showSection(section) {
+            if (section === 'docs') {
+                alert('Documentation includes:\n• Installation guides\n• Framework integration\n• Best practices\n• Troubleshooting');
+            } else if (section === 'support') {
+                alert('Support options:\n• Comprehensive guides\n• GTM Help Center\n• Community forums\n• Email support');
+            }
         }
     </script>
 </body>
