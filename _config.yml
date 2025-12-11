@@ -1,0 +1,25 @@
+theme: jekyll-theme-minimal
+title: Google Tag Manager Template Generator
+description: Free GTM setup tool with one-click configuration for GA4 and analytics tracking
+baseurl: ""
+url: "https://hlpflcg.github.io"
+
+# SEO settings
+google_analytics: 
+lang: en
+author: Google Tag Manager Template Generator
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - .git/
+  - .gitignore
+  - README.md
+  - CNAME
+  - node_modules/
+  - vendor/
