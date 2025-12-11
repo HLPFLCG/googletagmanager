@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://googletagmanager.com/sitemap.xml
+
+# Allow search engines to crawl all content
+Allow: /
+Allow: /faq
+Allow: /testimonials
+
+# Block common non-content paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /temp/
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
